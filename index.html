@@ -1,0 +1,2340 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوره جامع هوش مصنوعی در کسب‌وکار (مطالعه‌ موردی: فروشگاه زیورآلات رزینی)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8fafc;
+            color: #111827;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: auto;
+            padding: 0 1rem;
+        }
+
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+            border: 1px solid #e2e8f0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 4rem 1rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 640px) {
+            .header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        .step-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0072ff;
+            background-color: #e6f7ff;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            line-height: 1;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .step-number {
+                font-size: 3.5rem;
+                padding: 1rem 1.7rem;
+                min-width: 80px;
+            }
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .step-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        .title-icon {
+            width: 2rem;
+            height: 2rem;
+            margin-left: 0.75rem;
+            fill: currentColor;
+            color: #0072ff;
+        }
+
+        @media (min-width: 640px) {
+            .title-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+                margin-left: 1rem;
+            }
+        }
+
+        .sub-heading {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0072ff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .example-block {
+            background-color: #f5faff;
+            border-right: 5px solid #0072ff;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .example-block:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .example-block h4 {
+            font-weight: 700;
+            color: #0072ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .bad-example-block {
+            background-color: #fef2f2;
+            border-right: 5px solid #ef4444;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .bad-example-block h4 {
+            font-weight: 700;
+            color: #ef4444;
+            margin-bottom: 0.5rem;
+        }
+
+        .takeaway-block {
+            background-color: #f0fdf4;
+            border-right: 5px solid #22c55e;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .takeaway-block h4 {
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 0.5rem;
+        }
+
+        .pro-tip-block {
+            background-color: #f5f3ff;
+            border-right: 5px solid #8b5cf6;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .pro-tip-block h4 {
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercise-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .exercise-list li {
+            background-color: #fafafa;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .exercise-list li:hover {
+            background-color: #f0f4ff;
+        }
+
+        .list-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-left: 0.75rem;
+            color: #0072ff;
+            min-width: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .rubric-table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+
+        .rubric-table th,
+        .rubric-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: right;
+        }
+
+        .rubric-table th {
+            background-color: #f8fafc;
+        }
+
+        .template-block {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .template-block pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Dark Mode styles */
+        body.dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        body.dark .section-card {
+            background-color: #2d3748;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid #4a5568;
+        }
+
+        body.dark .step-title {
+            color: #fff;
+        }
+
+        body.dark .sub-heading {
+            color: #00c6ff;
+        }
+
+        body.dark .example-block {
+            background-color: #2d3748;
+            border-right-color: #00c6ff;
+        }
+
+        body.dark .example-block h4 {
+            color: #00c6ff;
+        }
+
+        body.dark .bad-example-block {
+            background-color: #4a2d32;
+            border-right-color: #fca5a5;
+        }
+
+        body.dark .bad-example-block h4 {
+            color: #fca5a5;
+        }
+
+        body.dark .takeaway-block {
+            background-color: #1c2e2a;
+            border-right-color: #4ade80;
+        }
+
+        body.dark .takeaway-block h4 {
+            color: #4ade80;
+        }
+
+        body.dark .pro-tip-block {
+            background-color: #2c2a46;
+            border-right-color: #a78bfa;
+        }
+
+        body.dark .pro-tip-block h4 {
+            color: #a78bfa;
+        }
+
+        body.dark .exercise-list li {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+
+        body.dark .rubric-table th,
+        body.dark .rubric-table td {
+            border-color: #4a5568;
+        }
+
+        body.dark .rubric-table th {
+            background-color: #1e293b;
+        }
+
+        body.dark .template-block {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+
+        body.dark .template-block pre {
+            background-color: #0f172a;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 0.5rem 1rem;
+            z-index: 50;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .navbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .navbar.dark {
+            background-color: #2d3748;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            padding: 0.5rem 1rem;
+            color: #1f2937;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .navbar a:hover {
+            background-color: #e2e8f0;
+        }
+
+        .navbar.dark a {
+            color: #e2e8f0;
+        }
+
+        .navbar.dark a:hover {
+            background-color: #4a5568;
+        }
+
+        #dark-mode-toggle {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark #dark-mode-toggle {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+
+        .scroll-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #e2e8f0;
+            z-index: 100;
+        }
+
+        .scroll-progress-bar {
+            height: 5px;
+            background: #0072ff;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Additional styles from the second course */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.25);
+            border-color: rgba(236, 72, 153, 0.5);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ec4899, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .accordion-toggle {
+            cursor: pointer;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .accordion-item-inner {
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 0.75rem;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .accordion-item-inner:hover {
+            background-color: rgba(15, 23, 42, 0.5);
+        }
+
+        .gemini-feature {
+            border-top: 1px solid rgba(236, 72, 153, 0.2);
+            margin-top: 24px;
+            padding-top: 24px;
+        }
+
+        .gemini-input {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid #475569;
+            color: #e2e8f0;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .gemini-input:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.3);
+        }
+
+        .gemini-button {
+            background: linear-gradient(90deg, #ec4899, #a855f7);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.2);
+        }
+
+        .gemini-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .gemini-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .gemini-result {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: 1px solid #475569;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f9a8d4;
+            border-top: 2px solid #ec4899;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            transform: translateY(2px);
+        }
+
+        .tab-button:hover {
+            color: #f9a8d4;
+        }
+
+        .tab-active {
+            color: #ec4899;
+            border-bottom-color: #ec4899;
+        }
+    </style>
+</head>
+
+<body class="p-6">
+
+    <button id="dark-mode-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-sun dark:hidden">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m4.93 19.07 1.41-1.41" />
+            <path d="m17.66 6.34 1.41-1.41" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-moon hidden dark:block text-gray-200">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+    </button>
+
+    <div class="scroll-progress-container">
+        <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+    </div>
+
+    <div class="navbar">
+        <a href="#session1">جلسه ۱: مهندسی پرامپت</a>
+        <a href="#session2">جلسه ۲: ایجاد کسب‌وکار</a>
+        <a href="#session3">جلسه ۳: مدیریت کسب‌وکار</a>
+        <a href="#session4">جلسه ۴: تولید محتوا</a>
+        <a href="#session5">جلسه ۵: تبلیغات</a>
+    </div>
+
+    <div class="container mt-12">
+        <header class="header">
+            <h1>دوره جامع هوش مصنوعی در کسب‌وکار</h1>
+            <p class="mt-4 text-base sm:text-lg max-w-2xl mx-auto">
+                از ایده‌پردازی تا اجرا و مدیریت کسب‌وکار با هوش مصنوعی<br />
+                <span class="font-semibold">به همراه مطالعه‌ موردی کامل: راه‌اندازی فروشگاه زیورآلات دست‌ساز / رزینی
+                    «رزین‌آرا»</span><br /><br />
+                ارائه شده در: <br />دانشگاه آزاد - واحد تهران جنوب<br />
+                توسط: مهندس <a href="https://instagram.com/hosseinfallah_h">حسین فلاح</a> (مدرس ارشد آکادمی
+                <a href="https://www.instagram.com/aitozed.ir/">AItoZed</a>)
+            </p>
+        </header>
+
+        <div class="section-card">
+            <h2 class="step-title flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="title-icon lucide lucide-info">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4" />
+                    <path d="M12 8h.01" />
+                </svg>پشت صحنه AI: شما کاربر هوشمند، نه یک متخصص!</h2>
+            <p class="text-gray-900 dark:text-gray-300 mt-2">
+                <b>مهم است بدانید که شما به عنوان کارمند یک <b>کاربر و مصرف‌کننده هوشمند</b> این ابزارها هستید. شما از
+                    محصولی استفاده می‌کنید که متخصصان هوش مصنوعی آن را ساخته‌اند.</b>
+            </p>
+            <div class="mt-4">
+                <h3 class="font-bold text-gray-800 dark:text-gray-100">شما به عنوان یک کارمند باید بدانید:</h3>
+                <ul class="list-disc list-inside text-gray-900 dark:text-gray-300 mt-2 pr-4">
+                    <li><b>هنر پرامپت‌نویسی دقیق و هدفمند</b></li>
+                    <li><b>کاربردهای تجاری و شغلی هر ابزار</b></li>
+                    <li><b>نحوه ترکیب ابزارهای مختلف برای ایجاد یک خروجی کامل</b></li>
+                    <li><b>نکات اخلاقی و استفاده مسئولانه در محیط کار</b></li>
+                </ul>
+            </div>
+            <p class="text-gray-900 dark:text-gray-300 mt-4">
+                <b>وظیفه شما ساختن ماشین نیست، بلکه <b>رانندگی هوشمندانه</b> با آن در مسیر اهداف سازمانی است.</b>
+            </p>
+        </div>
+
+        <!-- Session 1: Full Prompt Engineering Course with AUTOMAT -->
+        <div class="section-card" id="session1">
+            <div class="step-container">
+                <div class="step-number">۱</div>
+                <div>
+                    <h2 class="step-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="title-icon lucide lucide-brain">
+                            <path d="M12 2a7 7 0 0 0-7 7v6a7 7 0 0 0 7 7 7 7 0 0 0 7-7V9a7 7 0 0 0-7-7z" />
+                        </svg>
+                        دوره کامل مهندسی پرامپت با چارچوب AUTOMAT
+                        <span class="text-sm font-normal text-gray-700 mr-2">(زمان: ۳ ساعت)</span>
+                    </h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>این جلسه یک دوره کامل و فشرده برای یادگیری مهندسی پرامپت است.</b> با چارچوب
+                        <span class="text-blue-600">AUTOMAT</span>
+                        یاد می‌گیریم چگونه از یک کاربر معمولی به یک طراح حرفه‌ای پرامپت تبدیل شویم؛ کسی که می‌داند
+                        چگونه با هوش مصنوعی
+                        «فکر کند»، نه فقط حرف بزند.
+                    </p>
+                </div>
+            </div>
+
+            <div class="takeaway-block">
+                <h4>🎯 اهداف یادگیری</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>درک عمیق از منطق پشت رفتار مدل‌های زبانی</li>
+                    <li>تسلط بر چارچوب ۷ مرحله‌ای AUTOMAT</li>
+                    <li>شناخت تفاوت پرامپت ساده، پیشرفته و حرفه‌ای</li>
+                    <li>اجتناب از خطاهای رایج در پرامپت‌نویسی</li>
+                    <li>توانایی ساخت پرامپت‌های چندمرحله‌ای و قابل‌تکرار</li>
+                </ul>
+            </div>
+
+            <!-- AUTOMAT Framework Overview -->
+            <h3 class="sub-heading">🔹 معرفی چارچوب AUTOMAT</h3>
+            <div class="example-block">
+                <table class="rubric-table">
+                    <thead>
+                        <tr>
+                            <th>حرف</th>
+                            <th>معنا</th>
+                            <th>توضیح</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>A</b></td>
+                            <td>Aim</td>
+                            <td>هدف را دقیق، قابل اندازه‌گیری و روشن بیان کن.</td>
+                        </tr>
+                        <tr>
+                            <td><b>U</b></td>
+                            <td>Understanding</td>
+                            <td>هوش مصنوعی را از زمینه، نقش و هدف آگاه کن.</td>
+                        </tr>
+                        <tr>
+                            <td><b>T</b></td>
+                            <td>Task</td>
+                            <td>وظیفه را گام‌به‌گام توضیح بده تا خطا کاهش یابد.</td>
+                        </tr>
+                        <tr>
+                            <td><b>O</b></td>
+                            <td>Output Format</td>
+                            <td>قالب خروجی را تعیین کن (جدول، لیست، JSON و ...)</td>
+                        </tr>
+                        <tr>
+                            <td><b>M</b></td>
+                            <td>Metrics</td>
+                            <td>معیار سنجش کیفیت (طول، دقت، لحن و مثال‌ها) را تعریف کن.</td>
+                        </tr>
+                        <tr>
+                            <td><b>A</b></td>
+                            <td>Adjust</td>
+                            <td>خروجی را بررسی و با بازخورد اصلاح کن.</td>
+                        </tr>
+                        <tr>
+                            <td><b>T</b></td>
+                            <td>Test & Transfer</td>
+                            <td>در موقعیت‌های جدید تست کن و به پروژه‌های دیگر منتقل کن.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Step-by-step sections -->
+            <h3 class="sub-heading">A – Aim (هدف‌گذاری)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                بدون هدف واضح، پرامپت سردرگم خواهد بود. هدف باید نتیجه نهایی را تعریف کند.
+            </p>
+            <div class="example-block">
+                <h4>مثال:</h4>
+                <p>🎯 هدف: «تولید یک خلاصه ۱۵۰ کلمه‌ای از مقاله‌ای درباره تأثیر هوش مصنوعی بر آموزش آنلاین»</p>
+            </div>
+
+            <h3 class="sub-heading">U – Understanding (درک زمینه)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با معرفی نقش، مخاطب و هدف، درک مدل از وظیفه را عمیق‌تر کن.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت خوب:</h4>
+                <p>«شما یک مدرس آنلاین هستید که می‌خواهید برای دانشجویان تازه‌کار، مفاهیم هوش مصنوعی را ساده و کاربردی
+                    توضیح دهید.»</p>
+                <h4 class="mt-2 text-red-500">پرامپت بد:</h4>
+                <p>«در مورد هوش مصنوعی توضیح بده.» (خیلی مبهم است، بدون مخاطب یا هدف)</p>
+            </div>
+
+            <h3 class="sub-heading">T – Task (وظیفه دقیق)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                وظیفه را به بخش‌های کوچک‌تر تقسیم کن و شفاف بنویس.
+            </p>
+            <div class="example-block">
+                <h4>مثال:</h4>
+                <ol class="list-decimal list-inside pr-4">
+                    <li>ابتدا مفاهیم اصلی را فهرست کن.</li>
+                    <li>سپس برای هر مفهوم یک توضیح کوتاه بنویس.</li>
+                    <li>در پایان، جمع‌بندی سه‌خطی ارائه بده.</li>
+                </ol>
+            </div>
+
+            <h3 class="sub-heading">O – Output Format (قالب خروجی)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                تعیین قالب باعث می‌شود خروجی خوانا و قابل‌استفاده باشد.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت خوب:</h4>
+                <p>«نتیجه را در قالب جدول با دو ستون بنویس: مفهوم | توضیح کوتاه.»</p>
+                <h4 class="mt-2 text-red-500">پرامپت بد:</h4>
+                <p>«در موردش بنویس.» (هیچ ساختاری ندارد)</p>
+            </div>
+
+            <h3 class="sub-heading">M – Metrics (معیار سنجش)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                قبل از اجرا، معیاری برای قضاوت کیفیت تعریف کن.
+            </p>
+            <div class="example-block">
+                <ul class="list-disc list-inside pr-4">
+                    <li>حداکثر ۳۰۰ کلمه</li>
+                    <li>لحن آموزشی و صمیمی</li>
+                    <li>حداقل دو مثال واقعی</li>
+                    <li>عدم تکرار جملات</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">A – Adjust (اصلاح و بهبود)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با بررسی خروجی، از مدل بخواه همان پاسخ را بهتر بازنویسی کند.
+            </p>
+            <div class="pro-tip-block">
+                <h4>تکنیک اصلاح:</h4>
+                <p>🔁 بگو: «همین متن را با زبان ساده‌تر و ساختار شماره‌گذاری بازنویسی کن.»</p>
+            </div>
+
+            <h3 class="sub-heading">T – Test & Transfer (آزمایش و انتقال)</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                پرامپت موفق را ذخیره و در پروژه‌های مشابه استفاده کن.
+            </p>
+            <div class="example-block">
+                <p>مثلاً پرامپتی که برای مقاله آموزشی نوشتی، می‌تواند برای اسکریپت ویدیو یا پست لینکدین نیز کار کند.
+                </p>
+            </div>
+
+            <!-- Do's and Don'ts -->
+            <h3 class="sub-heading">✅ بایدها و ❌ نبایدها در مهندسی پرامپت</h3>
+            <div class="example-block">
+                <h4>✅ بایدها (Do’s)</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>قبل از نوشتن پرامپت، دقیقاً بدان چه می‌خواهی.</li>
+                    <li>از چارچوب AUTOMAT استفاده کن تا هیچ مرحله‌ای جا نماند.</li>
+                    <li>لحن و نقش خود را مشخص کن (مثلاً «تو یک کارشناس بازاریابی هستی»).</li>
+                    <li>در صورت نیاز به پاسخ طولانی، درخواست خروجی مرحله‌ای بده.</li>
+                </ul>
+            </div>
+            <div class="bad-example-block">
+                <h4>❌ نبایدها (Don’ts)</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>درخواست مبهم مثل «یه متن بده» ننویس.</li>
+                    <li>در یک پرامپت چند موضوع نامرتبط را ترکیب نکن.</li>
+                    <li>از مدل انتظار خواندن ذهن نداشته باش؛ توضیح بده.</li>
+                    <li>از دستورهای احساسی یا نامعمول (مثل «خیلی قشنگش کن») بدون معیار پرهیز کن.</li>
+                </ul>
+            </div>
+
+            <!-- Practical Examples -->
+            <h3 class="sub-heading">💡 پرامپت خوب در برابر پرامپت بد</h3>
+            <div class="example-block">
+                <h4>پرامپت بد:</h4>
+                <p>«درباره فروش آنلاین توضیح بده.»</p>
+                <h4 class="mt-2">پرامپت خوب (طبق AUTOMAT):</h4>
+                <pre class="bg-gray-800 text-gray-100 p-3 rounded-md whitespace-pre-wrap">
+A: می‌خواهم برای دانشجویان کارآفرینی مقاله‌ای بنویسم.
+U: تو استاد بازاریابی دیجیتال هستی.
+T: ۵ مزیت کلیدی فروش آنلاین را توضیح بده و برای هر مورد مثال واقعی بیاور.
+O: خروجی را در قالب جدول دو ستونه بنویس.
+M: حداکثر ۲۵۰ کلمه، لحن آموزشی و صمیمی.
+A: اگر متن رسمی شد، بازنویسی کن تا ساده‌تر شود.
+T: در نهایت، همین پرامپت را برای پست لینکدین تست کن.
+    </pre>
+            </div>
+
+            <!-- Exercise Section -->
+            <h3 class="sub-heading">🧩 تمرین‌های کاربردی (۱۰ تمرین عملی)</h3>
+            <ul class="exercise-list">
+
+                <li>
+                    <b>تمرین ۱ – طراحی پرامپت محصول:</b>
+                    برای معرفی یک محصول فرضی (مثلاً ساعت هوشمند، اپلیکیشن مدیریت خواب یا کافه رباتیک)،
+                    یک پرامپت کامل بر اساس تمام مراحل <b>AUTOMAT</b> بنویس.
+                    هدف، مخاطب، قالب خروجی و معیارها را دقیق توضیح بده.
+                </li>
+
+                <li>
+                    <b>تمرین ۲ – پرامپت آموزشی:</b>
+                    یک موضوع آموزشی انتخاب کن (مثلاً «چگونه با هوش مصنوعی لوگو بسازیم»)
+                    و پرامپتی طراحی کن که مدل خروجی را به صورت گام‌به‌گام (step-by-step) تولید کند.
+                    در معیارها، حداکثر ۵ مرحله برای خروجی مشخص کن.
+                </li>
+
+                <li>
+                    <b>تمرین ۳ – تولید محتوای انگیزشی:</b>
+                    پرامپتی بنویس که یک متن انگیزشی برای شبکه‌های اجتماعی تولید کند.
+                    لحن را صمیمی و انسانی نگه دار و از مدل بخواه در پایان پیام الهام‌بخش بدهد.
+                </li>
+
+                <li>
+                    <b>تمرین ۴ – استراتژی تبلیغاتی:</b>
+                    برای برند فرضی خود پرامپتی طراحی کن که مدل استراتژی تبلیغاتی سه‌ماهه ارائه دهد.
+                    در <b>Output Format</b> از مدل بخواه جدول سه‌ستونه تولید کند:
+                    «ماه / هدف / نوع محتوا».
+                </li>
+
+                <li>
+                    <b>تمرین ۵ – ارزیابی پرامپت‌ها:</b>
+                    دو پرامپت متفاوت ولی با هدف مشابه بنویس
+                    (مثلاً هر دو برای نوشتن مقاله بازاریابی)
+                    و خروجی‌های مدل را مقایسه کن.
+                    توضیح بده کدام پرامپت بر اساس <b>AUTOMAT</b> دقیق‌تر بوده و چرا.
+                </li>
+
+                <li>
+                    <b>تمرین ۶ – تولید پرامپت خلاقیت:</b>
+                    پرامپتی بساز که مدل را مجبور به خلاقیت کند
+                    (مثلاً تولید ۱۰ ایده جدید در زمینه آموزش یا محتوا).
+                    در <b>Metrics</b> تعیین کن که حداقل ۸ ایده باید کاملاً منحصربه‌فرد باشند.
+                </li>
+
+                <li>
+                    <b>تمرین ۷ – خلاصه‌سازی مقاله:</b>
+                    پرامپتی طراحی کن که مقاله‌ای علمی را در ۵ بخش (مقدمه، روش، نتایج، تحلیل، جمع‌بندی) خلاصه کند.
+                    سپس خروجی را از نظر وضوح و دقت تحلیل کن و پیشنهاد بهبود بده.
+                </li>
+
+                <li>
+                    <b>تمرین ۸ – اصلاح پرامپت‌های اشتباه (۱۰ پرامپت برای تصحیح):</b><br>
+                    در این تمرین باید با استفاده از چارچوب <b>AUTOMAT</b>
+                    پرامپت‌های زیر را بازنویسی کنی.
+                    برای هر مورد مشخص کن که کدام مرحله (Aim, Understanding, Task, Output, Metrics, Adjust, Test)
+                    ناقص بوده و چگونه باید اصلاح شود.
+                    <div
+                        class="mt-3 bg-gray-50 dark:bg-gray-800 p-3 rounded-md border border-gray-200 dark:border-gray-700">
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>در مورد هوش مصنوعی توضیح بده.</li>
+                            <li>یه متن بنویس برای فروش محصول.</li>
+                            <li>در مورد بازاریابی بنویس.</li>
+                            <li>یه مقاله بده درباره خواب.</li>
+                            <li>یه پست برای اینستاگرام بنویس.</li>
+                            <li>در مورد آموزش آنلاین توضیح بده.</li>
+                            <li>یه شعر بنویس درباره کار.</li>
+                            <li>یه استراتژی بده برای رشد کسب‌وکار.</li>
+                            <li>متن تبلیغاتی قشنگ بنویس.</li>
+                            <li>در مورد تکنولوژی توضیح بده.</li>
+                        </ol>
+                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                            ✏️ هر پرامپت را بازنویسی کن تا تمام مراحل AUTOMAT در آن رعایت شوند و ساختار حرفه‌ای داشته
+                            باشند.
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <b>تمرین ۹ – پرامپت چندمرحله‌ای:</b>
+                    زنجیره‌ای از پرامپت‌ها طراحی کن که خروجی مرحله اول،
+                    ورودی مرحله دوم باشد.
+                    هدف، تمرین تعامل تکراری با مدل برای رسیدن به نتیجه بهینه است.
+                </li>
+
+                <li>
+                    <b>تمرین ۱۰ – تحلیل خودکار پرامپت:</b>
+                    از مدل بخواه خودش پرامپت تو را تحلیل کند
+                    و بگوید هر بخش (A تا T) چقدر واضح بوده است.
+                    سپس پرامپت را با پیشنهاد خودش بازنویسی کن و تفاوت نسخه‌ها را یادداشت کن.
+                </li>
+
+            </ul>
+
+            <div class="takeaway-block">
+                <h4>چک‌لیست نهایی AUTOMAT</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>آیا هدف روشن و قابل سنجش داری؟</li>
+                    <li>آیا مدل زمینه و نقش را درک کرده است؟</li>
+                    <li>آیا قالب خروجی مشخص و منظم است؟</li>
+                    <li>آیا معیار ارزیابی را تعیین کرده‌ای؟</li>
+                    <li>آیا مراحل اصلاح و تست را انجام داده‌ای؟</li>
+                </ul>
+            </div>
+
+            <!-- Accordion: Case Study Session 1 -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    مطالعه‌ موردی جلسه ۱ – مهندسی پرامپت برای برند «رزین‌آرا»
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    در این آکوردیون، همان چارچوب AUTOMAT را روی یک فروشگاه زیورآلات دست‌ساز / رزینی
+                                    پیاده می‌کنیم.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <p class="font-semibold text-pink-300 mb-1">
+                                🎯 هدف کلی جلسه ۱ در مطالعه‌ موردی:
+                            </p>
+                            <p>
+                                تبدیل ایده خام «فروش زیورآلات دست‌ساز رزینی» به مجموعه‌ای از پرامپت‌های حرفه‌ای که
+                                بعداً برای نام‌گذاری برند، تعریف سبک طراحی، نوشتن توضیحات محصول و طراحی پیج اینستاگرام
+                                استفاده می‌شوند.
+                            </p>
+
+                            <ol class="list-decimal list-inside space-y-2 mt-3">
+                                <li>
+                                    <b>A – Aim برای رزین‌آرا:</b><br />
+                                    نوشتن یک پرامپت مادر که هدفش این باشد:
+                                    «به من کمک کن یک برند زیورآلات دست‌ساز رزینی با هویت هنری، مینیمال و مناسب دختران
+                                    ۱۸ تا ۳۰ ساله طراحی کنم.»
+                                </li>
+                                <li>
+                                    <b>U – Understanding برای مدل:</b><br />
+                                    در پرامپت مشخص می‌کنیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>محصولات: گردنبند، گوشواره، انگشتر و دستبند رزینی</li>
+                                        <li>متریال: رزین شفاف + گل خشک، برگ طلا، صدف و …</li>
+                                        <li>مشتری هدف: دانشجو، دختران جوان، هدیه مناسبتی</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>T – Task برای این جلسه:</b><br />
+                                    از مدل می‌خواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>۳ سبک شخصیتی برای برند پیشنهاد بده (مثلاً شیک، هنری، دخترانه)</li>
+                                        <li>۵ جمله توصیفی کوتاه برای معرفی این برند بنویسد</li>
+                                        <li>۱۰ صفت کلیدی که همیشه باید در لحن برند باشد (مثلاً ظریف، دست‌ساز، خاص)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>O – Output Format:</b><br />
+                                    از مدل می‌خواهیم خروجی را در قالب:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک جدول «ستون ۱: عنصر برند – ستون ۲: توضیح» بدهد</li>
+                                        <li>در انتها یک پاراگراف خلاصه ۸۰ کلمه‌ای از هویت برند بنویسد</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>M – Metrics:</b><br />
+                                    معیارها:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>حداکثر ۳۰۰ کلمه</li>
+                                        <li>بدون کلمات خیلی رسمی</li>
+                                        <li>بدون استفاده از اصطلاحات فنی رزین</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>A – Adjust:</b><br />
+                                    پس از اولین خروجی، از مدل می‌خواهیم:
+                                    «همین متن را ساده‌تر کن، طوری که برای دانشجوی سال اول هنر قابل‌درک باشد.»
+                                </li>
+                                <li>
+                                    <b>T – Test & Transfer:</b><br />
+                                    همین پرامپت را یک‌بار دیگر اجرا می‌کنیم، این بار با تغییر کوچک:
+                                    «فرض کن این برند فقط روی گوشواره‌های مینیمال تمرکز دارد.»<br />
+                                    و تفاوت خروجی را با نسخه قبلی مقایسه می‌کنیم.
+                                </li>
+                            </ol>
+
+                            <div class="mt-4 p-3 rounded-xl bg-slate-800/80 border border-slate-600 text-xs sm:text-sm">
+                                <p class="font-semibold text-pink-300 mb-1">پرامپت پیشنهادی آماده استفاده برای کلاس:</p>
+                                <pre class="whitespace-pre-wrap text-slate-100 text-xs sm:text-sm">
+تو یک استراتژیست برند و متخصص بازاریابی در حوزه زیورآلات دست‌ساز هستی.
+می‌خواهم برند فرضی «رزین‌آرا» را طراحی کنم که فروشگاه آنلاین زیورآلات رزینی برای دختران ۱۸ تا ۳۰ سال است.
+
+A: هدف تو این است که هویت برند رزین‌آرا را تعریف کنی.
+U: محصولات ما شامل گردنبند، گوشواره، انگشتر و دستبند رزینی با گل خشک و المان‌های هنری است.
+T: 
+- ۳ سبک شخصیتی برای برند پیشنهاد بده.
+- ۵ جمله کوتاه معرفی برند بنویس.
+- ۱۰ صفت توصیفی ثابت برای لحن برند لیست کن.
+
+O: خروجی را در قالب این جدول بده:
+ستون ۱: بخش هویت برند
+ستون ۲: توضیح کوتاه
+
+M: حداکثر ۳۰۰ کلمه، لحن صمیمی و قابل‌فهم برای دانشجو.
+A: اگر متن سنگین شد، نسخه ساده‌تر هم پیشنهاد بده.
+T: در انتها یک پاراگراف ۸۰ کلمه‌ای برای «درباره ما» سایت رزین‌آرا بنویس.
+                                </pre>
+                            </div>
+
+                            <p class="mt-4 text-xs sm:text-sm text-slate-300">
+                                📌 خروجی همین آکوردیون، در جلسات بعدی برای انتخاب نام برند، طراحی لوگو، نوشتن بایو
+                                اینستاگرام و متن «درباره‌ ما» سایت رزین‌آرا استفاده خواهد شد.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session 2: Creating a Business -->
+        <div class="section-card" id="session2">
+            <div class="step-container">
+                <div class="step-number">۲</div>
+                <div>
+                    <h2 class="step-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="title-icon lucide lucide-rocket">
+                            <path
+                                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                            <path
+                                d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                        </svg>ایجاد کسب‌وکار از صفر
+                        <span class="text-sm font-normal text-gray-700 mr-2">(زمان: ۴ ساعت)</span>
+                    </h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>در این جلسه، یاد می‌گیرید چگونه با استفاده از هوش مصنوعی، یک کسب‌وکار را از مرحله
+                            ایده‌پردازی تا راه‌اندازی کامل پیاده‌سازی کنید.</b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="takeaway-block">
+                <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="inline-block align-middle ml-1 lucide lucide-graduation-cap">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg> اهداف یادگیری</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>ایده‌پردازی و ارزیابی ایده‌های کسب‌وکار با هوش مصنوعی</li>
+                    <li>تحقیقات بازار و تحلیل رقبا</li>
+                    <li>طراحی MVP و نمونه اولیه</li>
+                    <li>انتخاب نام برند و طراحی هویت بصری</li>
+                    <li>راه‌اندازی وب‌سایت و حضور آنلاین</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">ایده‌پردازی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                در این مرحله، با استفاده از هوش مصنوعی، ایده‌های نوآورانه برای کسب و کار خود پیدا می‌کنیم. هدف، یافتن
+                فرصت‌های جدید در بازار است که با علاقه و توانایی شما همخوانی داشته باشد.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>DeepSeek:</b> برای ایده‌پردازی دقیق و هدفمند</li>
+                    <li><b>ChatGPT:</b> یکی از معروف‌ترین مدل‌های هوش مصنوعی برای تولید متن و ایده‌پردازی</li>
+                    <li><b>TrendHunter:</b> وب‌سایتی برای کشف ترندهای نوظهور در صنایع مختلف</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای ایده‌پردازی:</h4>
+                <p>
+                    "شما یک مشاور کسب‌وکار خلاق با تجربه در کارآفرینی و شناسایی روندهای بازار هستید. تخصص شما در طوفان
+                    فکری ایده‌های کسب‌وکار منحصربه‌فرد است که نه تنها قابل اجرا هستند، بلکه برای مشتریان بالقوه جذاب
+                    هستند. وظیفه شما تولید فهرستی از ایده‌های کسب‌وکار جدید و جذاب است که با معیارهای زیر مطابقت دارند:
+                </p>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>بازار هدف: [بازار هدف شما]</li>
+                    <li>تمرکز صنعت: [صنعت شما]</li>
+                    <li>محدوده بودجه: [بودجه شما]</li>
+                    <li>موقعیت مکانی: [موقعیت مکانی شما]</li>
+                </ul>
+                <p class="mt-2">
+                    ایده‌ها را در قالب ساختاریافته ارائه دهید، از جمله نام ایده کسب‌وکار، توضیح مختصر و USP
+                    (نقطه فروش منحصربه‌فرد) برای هر مفهوم. هنگام طوفان فکری این ایده‌ها، روندهای فعلی بازار، فناوری‌های
+                    نوظهور و ترجیحات مصرف‌کننده را در نظر بگیرید."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">ارزیابی ایده</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                ایده‌های خود را با ابزارهای هوش مصنوعی اعتبارسنجی کنید تا از پتانسیل موفقیت آن‌ها مطمئن شوید. این
+                مرحله ریسک شکست را کاهش می‌دهد.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Jasper AI:</b> پلتفرمی قدرتمند برای تولید محتوای بازاریابی و تحلیل کسب‌وکار</li>
+                    <li><b>Validator AI:</b> ابزاری تخصصی برای اعتبار سنجی ایده‌های استارتاپی</li>
+                    <li><b>Dime A Dozen:</b> ابزاری برای ارزیابی سریع ایده‌های تجاری بر اساس داده‌های بازار</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">انتخاب نام برند</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                یک نام تجاری جذاب و به‌یادماندنی با کمک مولدهای نام هوشمند انتخاب کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Namelix:</b> تولید کننده نام برند با استفاده از هوش مصنوعی</li>
+                    <li><b>Business Name Generator:</b> یک ابزار ساده و کاربردی برای تولید نام برند</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">مسیر کسب و کار</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                مسیر راه و استراتژی کسب و کار خود را با ابزارهای هوشمند تدوین کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Upmetrics:</b> ابزاری برای برنامه‌ریزی و تدوین طرح کسب‌وکار</li>
+                    <li><b>LivePlan:</b> پلتفرمی برای نگارش طرح کسب‌وکار و پیش‌بینی‌های مالی</li>
+                    <li><b>Bizway:</b> دستیار هوش مصنوعی برای مدیریت و اتوماسیون وظایف کاری</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">طراحی لوگو</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                هویت بصری برند خود را با طراحی یک لوگوی حرفه‌ای توسط هوش مصنوعی بسازید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Looka:</b> طراح لوگو با هوش مصنوعی و کیت برندینگ</li>
+                    <li><b>Canva:</b> یک ابزار طراحی گرافیکی که امکان طراحی لوگو را فراهم می‌کند</li>
+                    <li><b>Brandmark.io:</b> سرویس طراحی لوگو و برندینگ</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">طراحی وب‌سایت</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                وب‌سایت کسب و کار خود را به سرعت و با کیفیت بالا با کمک هوش مصنوعی راه‌اندازی کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Vercel:</b> پلتفرم توسعه‌دهندگان که از هوش مصنوعی برای ایجاد وب‌سایت استفاده می‌کند</li>
+                    <li><b>Lovable:</b> وب‌سایت‌ساز هوشمند برای ایجاد صفحات فرود جذاب</li>
+                    <li><b>Microsoft Copilot:</b> ابزار کدنویسی و طراحی مایکروسافت</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">تمرین عملی</h3>
+            <div class="pro-tip-block">
+                <h4>تمرین: طراحی یک کسب‌وکار خیالی</h4>
+                <p>
+                    یک ایده کسب‌وکار جدید (مثلاً فروش یک محصول خاص یا ارائه یک سرویس) انتخاب کنید. با استفاده از
+                    ابزارهای معرفی‌شده، مراحل زیر را طی کنید:
+                </p>
+                <ol class="list-decimal list-inside pr-4 mt-2">
+                    <li>تحلیل بازار و شناسایی رقبا</li>
+                    <li>طراحی پرسونای مشتری</li>
+                    <li>پیشنهاد MVP (حداقل محصول قابل عرضه)</li>
+                    <li>تدوین یک استراتژی بازاریابی ساده</li>
+                    <li>طراحی لوگو و هویت بصری اولیه</li>
+                </ol>
+            </div>
+
+            <!-- Accordion: Case Study Session 2 -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    مطالعه‌ موردی جلسه ۲ – ساخت کسب‌وکار «رزین‌آرا» از صفر
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    در این بخش، تمام مراحل این جلسه را برای فروشگاه زیورآلات دست‌ساز / رزینی پیاده
+                                    می‌کنیم.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <p class="font-semibold text-pink-300 mb-1">
+                                🧱 مرحله‌به‌مرحله ساخت رزین‌آرا (نسخه آموزشی کلاس):
+                            </p>
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li>
+                                    <b>ایده نهایی:</b><br />
+                                    «فروشگاه آنلاین زیورآلات دست‌ساز رزینی با تمرکز روی هدیه‌های خاص و سفارشی برای تولد،
+                                    سالگرد و مناسبت‌ها.»<br />
+                                    (در کلاس می‌توانید با رأی‌گیری چند زیرنیش انتخاب کنید: فقط گوشواره؟ فقط گردنبند؟
+                                    ست‌های هدیه؟)
+                                </li>
+                                <li>
+                                    <b>تحقیقات بازار با هوش مصنوعی:</b><br />
+                                    یک پرامپت طراحی می‌کنیم که از مدل بخواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>۳ نوع رقیب در بازار ایران (پیج اینستا، سایت، فروش حضوری)</li>
+                                        <li>۳ مزیت رقابتی احتمالی برای رزین‌آرا (مثلاً سفارشی‌سازی، بسته‌بندی خاص، حک
+                                            اسم)</li>
+                                        <li>۳ ریسک (شکنندگی، ارسال، قیمت، کپی‌کاری رقبا)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>تعریف MVP برای رزین‌آرا:</b><br />
+                                    در کلاس، با کمک مدل تصمیم می‌گیریم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>در شروع فقط ۱۰ مدل گوشواره و ۵ مدل گردنبند روی سایت باشند.</li>
+                                        <li>همه محصولات در سه رنج قیمتی ساده تعریف شوند (مثلاً اقتصادی، هدیه لوکس،
+                                            سفارشی).</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>انتخاب نام برند (اگر رزین‌آرا را عوض کنیم):</b><br />
+                                    می‌توانید یک تمرین کلاسی داشته باشید:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>از مدل بخواهید ۲۰ نام فارسی و ترکیبی پیشنهادی برای برند زیورآلات رزینی بدهد.
+                                        </li>
+                                        <li>نام‌ها را براساس معیارهای جذابیت، سادگی، به‌یادماندنی بودن نمره‌دهی کنید.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>طراحی لوگو برای رزین‌آرا:</b><br />
+                                    با استفاده از ابزارهای طراحی (Canva / Looka) و کمک هوش مصنوعی، در کلاس مشخص می‌کنیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>لوگو بیشتر تایپوگرافی باشد یا نماد (آیکون قطره رزین، برگ، گل خشک و…)</li>
+                                        <li>رنگ‌های اصلی برند: مثلاً کرم، رزگلد و سبز زیتونی ملایم</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>اسکچ اولیه صفحه‌ی اصلی سایت رزین‌آرا:</b><br />
+                                    یک پرامپت به مدل می‌دهیم:
+                                    <pre
+                                        class="whitespace-pre-wrap bg-slate-800/80 text-slate-100 p-3 rounded-lg text-xs sm:text-sm mt-1">
+برای فروشگاه آنلاین زیورآلات رزینی «رزین‌آرا»، ساختار صفحه اصلی سایت را در قالب بخش‌های زیر پیشنهاد بده:
+- هدر
+- بنر اصلی
+- محصولات ویژه
+- دسته‌بندی‌ها
+- نظرات مشتریان
+- بخش «درباره ما»
+- سوالات متداول
+برای هر بخش یک توضیح کوتاه بنویس.</pre>
+                                </li>
+                                <li>
+                                    <b>جمع‌بندی جلسه به‌صورت تحویل کلاسی:</b><br />
+                                    خروجی این آکوردیون برای هر دانشجو/گروه باید شامل این موارد باشد:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>شرح کوتاه ایده نهایی رزین‌آرا (حداکثر ۵ خط)</li>
+                                        <li>خلاصه بازار و رقبا در ۵ Bullet</li>
+                                        <li>MVP در قالب یک جدول ساده (نوع محصول / تعداد مدل / قیمت حدودی)</li>
+                                        <li>۳ پروپوزال نام برند + یکی که انتخاب شده</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <p class="mt-3 text-xs sm:text-sm text-slate-300">
+                                📌 از این خروجی در جلسات بعد برای تولید محتوا، مدیریت سفارش، طراحی پیج اینستاگرام و
+                                کمپین‌های تبلیغاتی رزین‌آرا استفاده می‌شود.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session 3: Managing a Business -->
+        <div class="section-card" id="session3">
+            <div class="step-container">
+                <div class="step-number">۳</div>
+                <div>
+                    <h2 class="step-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="title-icon lucide lucide-settings">
+                            <path
+                                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>مدیریت کسب‌وکار
+                        <span class="text-sm font-normal text-gray-700 mr-2">(زمان: ۳ ساعت)</span>
+                    </h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>در این جلسه، یاد می‌گیرید چگونه با استفاده از هوش مصنوعی، کسب‌وکار خود را به صورت مؤثر
+                            مدیریت کنید، از فروش و پشتیبانی مشتری تا تحلیل داده و استراتژی رشد.</b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="takeaway-block">
+                <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="inline-block align-middle ml-1 lucide lucide-graduation-cap">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg> اهداف یادگیری</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>مدیریت فروش و ارتباط با مشتری</li>
+                    <li>پشتیبانی مشتری با هوش مصنوعی</li>
+                    <li>تحلیل داده‌های کسب‌وکار</li>
+                    <li>مدیریت تیم و بهره‌وری</li>
+                    <li>استراتژی رشد و مقیاس‌پذیری</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">مدیریت فروش و ارتباط با مشتری</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با استفاده از هوش مصنوعی می‌توانید فرآیندهای فروش را بهینه کنید و پاسخ‌گویی به مشتریان را خودکار کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>واتساپ بیزینس + ربات ساده:</b> برای مدیریت ارتباط با مشتریان</li>
+                    <li><b>ChatGPT:</b> برای تولید پاسخ‌های خودکار و شخصی‌سازی شده</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای مدیریت فروش:</h4>
+                <p>
+                    "نقش یک مشتری مردد را بازی کن که قصد خرید [نام محصول] را دارد. من فروشنده هستم. مکالمه را شروع کن و
+                    سعی کن از من جواب‌های قانع‌کننده بگیری."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">پشتیبانی مشتری با هوش مصنوعی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                هوش مصنوعی می‌تواند به عنوان یک چت‌بات پشتیبانی عمل کند و به سوالات متداول مشتریان پاسخ دهد.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Zendesk AI (با VPN):</b> پلتفرم پشتیبانی مشتری با قابلیت‌های هوش مصنوعی</li>
+                    <li><b>ChatGPT API:</b> برای ساخت چت‌بات پشتیبانی سفارشی</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای پشتیبانی مشتری:</h4>
+                <p>
+                    "تو به عنوان پشتیبان یک فروشگاه آنلاین عمل کن. مشتری پرسیده: «چرا سفارش من دیر رسید؟» یک پاسخ
+                    مودبانه، حرفه‌ای و آرامش‌بخش بنویس که در عین حال اعتماد مشتری را جلب کند."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">تحلیل داده‌های کسب‌وکار</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با استفاده از ابزارهای هوش مصنوعی می‌توانید گزارش‌های سایت و کسب‌وکار خود را تحلیل کرده و تصمیمات
+                آگاهانه‌تری بگیرید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Google Analytics + Looker Studio:</b> برای تحلیل داده‌های وب‌سایت</li>
+                    <li><b>ChatGPT / DeepSeek:</b> برای تحلیل و تفسیر داده‌ها</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای تحلیل داده:</h4>
+                <p>
+                    "این داده‌ها مربوط به سایت فروشگاه من است: [خروجی آنالیتیکس] تحلیل کن چه محصولی بیشتر فروش دارد، چه
+                    صفحه‌ای بیشترین ترک کاربر را داشته، و سه پیشنهاد برای بهبود نرخ تبدیل بده."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">مدیریت تیم و بهره‌وری</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                برای هماهنگی بهتر تیم، می‌توانید از هوش مصنوعی برای مدیریت پروژه و خلاصه‌سازی گزارش‌ها استفاده کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Notion AI:</b> برای مدیریت پروژه و مستندات تیمی</li>
+                    <li><b>ClickUp AI:</b> پلتفرم مدیریت پروژه با قابلیت‌های هوش مصنوعی</li>
+                    <li><b>ChatGPT:</b> برای خلاصه‌سازی جلسات و گزارش‌ها</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای مدیریت تیم:</h4>
+                <p>
+                    "از این گزارش تیمی: [متن گزارش] یک خلاصه کوتاه برای مدیرعامل بساز که شامل مهم‌ترین کارهای
+                    انجام‌شده، مشکلات اصلی و پیشنهادات باشد."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">استراتژی رشد و مقیاس‌پذیری</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                هوش مصنوعی به شما در طراحی استراتژی‌های رشد سریع و کم‌هزینه برای کسب‌وکار شما کمک می‌کند.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Gemini / ChatGPT:</b> برای طراحی استراتژی‌های رشد</li>
+                    <li><b>Apollo.io (با VPN):</b> برای یافتن مشتریان بالقوه</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای استراتژی رشد:</h4>
+                <p>
+                    "برای یک کسب‌وکار [نوع کسب‌وکار] که در ایران فعالیت می‌کند و بودجه تبلیغاتی محدودی دارد، سه
+                    استراتژی رشد سریع پیشنهاد بده که عملی و کم‌هزینه باشند."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">تمرین عملی</h3>
+            <div class="pro-tip-block">
+                <h4>تمرین: طراحی سیستم مدیریت کسب‌وکار</h4>
+                <p>برای کسب‌وکار خیالی که در جلسه قبل طراحی کردید، یک سیستم مدیریتی طراحی کنید که شامل:</p>
+                <ol class="list-decimal list-inside pr-4 mt-2">
+                    <li>سیستم پشتیبانی مشتری با پاسخ‌های خودکار</li>
+                    <li>فرآیند فروش و پیگیری مشتریان</li>
+                    <li>سیستم تحلیل داده برای تصمیم‌گیری</li>
+                    <li>استراتژی رشد برای ۶ ماه آینده</li>
+                </ol>
+            </div>
+
+            <!-- Accordion: Case Study Session 3 -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    مطالعه‌ موردی جلسه ۳ – مدیریت فروشگاه «رزین‌آرا»
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    طراحی سیستم مدیریت سفارش، پیام‌ها، موجودی و رشد فروش برای زیورآلات رزینی.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li>
+                                    <b>طراحی سناریوی پیام‌های مشتری در اینستاگرام:</b><br />
+                                    از مدل می‌خواهیم ۵ سناریوی واقعی برای پیام مشتریان بنویسد:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>سؤال درباره قیمت</li>
+                                        <li>سفارش سفارشی با نام روی زیورآلات</li>
+                                        <li>شکایت بابت تأخیر در ارسال</li>
+                                        <li>درخواست تعویض محصول آسیب‌دیده</li>
+                                        <li>پرسش درباره ضدحساسیت بودن فلزات</li>
+                                    </ul>
+                                    بعد برای هر سناریو یک پاسخ استاندارد مودبانه و انسانی طراحی می‌کنیم.
+                                </li>
+                                <li>
+                                    <b>الگوی پاسخ سریع در DM برای رزین‌آرا:</b><br />
+                                    در کلاس، با کمک مدل، چند پاسخ آماده کوتاه می‌سازیم که بتوان در کوئیک ریپلای
+                                    اینستاگرام ذخیره کرد؛ مثلاً:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>«سلام عزیزم 👋 قیمت دقیق هر مدل رو داخل هایلایت قیمت‌ها گذاشتم، اگر مدل
+                                            خاصی مدنظرت هست برام اسکرینشات بفرست ❤️»</li>
+                                        <li>«سفارش سفارشی با نام هم می‌پذیریم، فقط ۳ تا ۵ روز زمان ساخت نیاز داریم 🌿»
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>مدیریت موجودی ساده با کمک AI:</b><br />
+                                    یک پرامپت طراحی می‌کنیم تا مدل از روی یک جدول ساده (ستون: محصول، تعداد موجودی،
+                                    فروش ماه گذشته) پیشنهاد بدهد:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>کدام مدل‌ها باید دوباره ساخته شوند؟</li>
+                                        <li>کدام مدل‌ها فروش ضعیف داشته و نیاز به عکس/کپشن بهتر دارند؟</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>تحلیل داده‌های فرضی فروش:</b><br />
+                                    یک جدول کوچک فرضی برای فروش ۱۰ محصول رزینی می‌سازیم (در کلاس/اسلاید) و از مدل
+                                    می‌خواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>۳ محصول پرفروش را شناسایی کند</li>
+                                        <li>۲ علت احتمالی فروش کم بقیه را حدس بزند</li>
+                                        <li>۳ پیشنهاد برای افزایش میانگین سبد خرید بدهد (مثلاً پیشنهاد ست کردن
+                                            گوشواره+گردنبند)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>طراحی استراتژی رشد ۳ ماهه برای رزین‌آرا:</b><br />
+                                    از مدل می‌خواهیم براساس فرض:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>صفحه اینستاگرام: ۱۵۰۰ فالوور</li>
+                                        <li>میانگین سفارش ماهانه: ۳۰ سفارش</li>
+                                    </ul>
+                                    یک برنامه رشد ۳ ماهه با هدف رسیدن به:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>۳۰۰۰ فالوور</li>
+                                        <li>۶۰ سفارش در ماه</li>
+                                    </ul>
+                                    پیشنهاد بدهد (بدون تبلیغات سنگین پولی – تمرکز روی محتوا و همکاری با میکرو
+                                    اینفلوئنسرها).
+                                </li>
+                            </ol>
+
+                            <p class="mt-3 text-xs sm:text-sm text-slate-300">
+                                📌 نتیجه این جلسه: یک مجموعه متن آماده + سناریو + تحلیل ابتدایی داده برای مدیریت عملی
+                                فروشگاه رزین‌آرا.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session 4: Content Creation -->
+        <div class="section-card" id="session4">
+            <div class="step-container">
+                <div class="step-number">۴</div>
+                <div>
+                    <h2 class="step-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="title-icon lucide lucide-pen-tool">
+                            <path d="M12 22l-8-4 8-10 8 10-8 4Z" />
+                            <path d="M12 2v10" />
+                        </svg>تولید محتوا
+                        <span class="text-sm font-normal text-gray-700 mr-2">(زمان: ۵ ساعت)</span>
+                    </h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>در این جلسه، یاد می‌گیرید چگونه با استفاده از هوش مصنوعی، محتوای متنی، بصری، صوتی و ویدیویی
+                            حرفه‌ای تولید کنید و یک استراتژی محتوای جامع برای کسب‌وکار خود طراحی کنید.</b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="takeaway-block">
+                <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="inline-block align-middle ml-1 lucide lucide-graduation-cap">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg> اهداف یادگیری</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>تولید محتوای متنی حرفه‌ای</li>
+                    <li>طراحی استراتژی و تقویم محتوایی</li>
+                    <li>ساخت محتوای بصری و ویدیویی</li>
+                    <li>کپشن‌نویسی و هشتگ‌گذاری</li>
+                    <li>اتوماسیون و مدیریت تعاملات</li>
+                    <li>تولید صوت و ویدیو با هوش مصنوعی</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">تولید محتوای متنی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                پس از تسلط بر هنر پرامپت‌نویسی، اکنون می‌توانید انواع محتوای متنی حرفه‌ای برای مقاصد شغلی تولید کنید: از
+                مقاله و کپشن شبکه‌های اجتماعی گرفته تا سناریو و گزارش‌های داخلی.
+            </p>
+
+            <div class="example-block">
+                <h4>انواع محتوای متنی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>مقاله وبلاگ (B2B):</b> محتوای طولانی و آموزشی برای کسب‌وکارها</li>
+                    <li><b>ایمیل اطلاع‌رسانی (B2C):</b> محتوای کوتاه و اطلاع‌رسان برای مشتریان نهایی</li>
+                    <li><b>پست لینکدین (حرفه‌ای):</b> محتوای بسیار کوتاه و تعاملی برای متخصصان</li>
+                    <li><b>کپشن اینستاگرام:</b> متن های تبلیغاتی و داستانی گیرا</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای تولید محتوای متنی:</h4>
+                <p>
+                    "برای معرفی محصول [نام محصول] یک متن تبلیغاتی اینستاگرام بنویس که هم طنز باشد، هم کوتاه، و در پایان
+                    یک کال تو اکشن جذاب داشته باشد."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">طراحی استراتژی و تقویم محتوایی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                فعالیت بدون استراتژی در شبکه‌های اجتماعی مانند تیراندازی در تاریکی است. هوش مصنوعی می‌تواند به شما در
+                تعیین ستون‌های محتوایی (Content Pillars)، لحن برند (Tone of Voice) و ساخت یک تقویم محتوایی ماهانه کمک
+                کند تا همیشه محتوای ارزشمند برای ارائه داشته باشید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>ChatGPT:</b> برای طراحی استراتژی محتوا</li>
+                    <li><b>Gemini:</b> برای ایده‌پردازی محتوایی</li>
+                    <li><b>Notion AI:</b> برای مدیریت تقویم محتوایی</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای استراتژی محتوا:</h4>
+                <p>
+                    "برای یک پیج اینستاگرام با موضوع [موضوع پیج]، سه ستون اصلی محتوایی تعریف کن و برای هر ستون ۵ ایده
+                    پست پیشنهاد بده."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">ساخت محتوای بصری و ویدیویی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                ابزارهای طراحی مبتنی بر هوش مصنوعی به شما اجازه می‌دهند بدون نیاز به دانش گرافیک، محتوای بصری
+                خیره‌کننده بسازید. کافی است ایده خود را بنویسید تا هوش مصنوعی چندین طرح پیشنهادی به شما ارائه دهد.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>Canva (Magic Studio):</b> برای طراحی گرافیک و محتوای بصری</li>
+                    <li><b>Microsoft Designer:</b> برای طراحی حرفه‌ای با هوش مصنوعی</li>
+                    <li><b>InVideo / Pictory:</b> برای ساخت ویدیو از متن یا تصاویر</li>
+                    <li><b>Midjourney / DALL·E 3:</b> برای تولید تصاویر با هوش مصنوعی</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای تولید تصویر:</h4>
+                <p>
+                    "A diverse team of professionals collaborating around a futuristic holographic interface in a
+                    bright,
+                    modern office. Style: minimalist, vector illustration with a blue and orange color palette. --ar
+                    16:9"
+                </p>
+            </div>
+
+            <h3 class="sub-heading">کپشن‌نویسی و هشتگ‌گذاری</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                کپشن قلب تپنده پست شماست. با استفاده از ChatGPT یا Gemini می‌توانید کپشن‌هایی با لحن‌های مختلف (طنز،
+                رسمی، صمیمی) بنویسید، داستان‌سرایی کنید و مخاطب را به انجام کاری (Call to Action) دعوت کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>ChatGPT:</b> برای نوشتن کپشن‌های خلاقانه</li>
+                    <li><b>Gemini:</b> برای تولید محتوای متنی متنوع</li>
+                    <li><b>Copy.ai:</b> برای کپی‌رایتیگ حرفه‌ای</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای کپشن‌نویسی:</h4>
+                <p>
+                    "برای معرفی محصول [نام محصول] یک کپشن تبلیغاتی اینستاگرام بنویس که هم طنز باشد، هم کوتاه، و در
+                    پایان یک کال تو اکشن جذاب داشته باشد."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">اتوماسیون و مدیریت تعاملات</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با افزایش تعداد مخاطبان، مدیریت تعاملات دشوار می‌شود. می‌توانید از هوش مصنوعی برای نوشتن پاسخ‌های آماده
+                به سوالات متداول استفاده کنید.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>ManyChat:</b> برای پاسخ خودکار در پیام‌رسان‌ها</li>
+                    <li><b>ChatGPT:</b> برای تولید قالب پاسخ</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای اتوماسیون:</h4>
+                <p>"یک قالب پاسخ مودبانه برای کامنت‌هایی که قیمت محصول را می‌پرسند بنویس."</p>
+            </div>
+
+            <h3 class="sub-heading">تولید صوت و ویدیو با هوش مصنوعی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                هوش مصنوعی می‌تواند به شما در تولید محتوای صوتی و ویدیویی حرفه‌ای کمک کند، از پادکست و کتاب‌های صوتی
+                تا ویدیوهای تبلیغاتی و آموزشی.
+            </p>
+
+            <div class="example-block">
+                <h4>ابزارهای پیشنهادی:</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li><b>ElevenLabs:</b> برای تبدیل متن به گفتار (TTS)</li>
+                    <li><b>Descript:</b> برای ویرایش صدا</li>
+                    <li><b>RunwayML:</b> برای تولید ویدیو با هوش مصنوعی</li>
+                    <li><b>HeyGen:</b> برای ساخت ویدیوهای سخنگو با آواتار</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه برای تولید صوت:</h4>
+                <p>"این متن را با صدایی آرام، حرفه‌ای و قابل اعتماد برای یک ویدیوی معرفی شرکت بخوان."</p>
+            </div>
+
+            <h3 class="sub-heading">تمرین عملی</h3>
+            <div class="pro-tip-block">
+                <h4>تمرین: طراحی پلان محتوایی</h4>
+                <p>
+                    برای یک پیج اینستاگرامی با موضوع دلخواه (مثلاً سفر، آشپزی، آموزش زبان)، یک تقویم محتوایی یک‌ماهه با
+                    حداقل ۱۰ پست طراحی کنید. از ابزارهای هوش مصنوعی برای:
+                </p>
+                <ol class="list-decimal list-inside pr-4 mt-2">
+                    <li>ایده‌یابی محتوایی</li>
+                    <li>نوشتن کپشن‌ها و هشتگ‌گذاری</li>
+                    <li>طراحی بصری پست‌ها</li>
+                    <li>تولید محتوای ویدیویی کوتاه</li>
+                </ol>
+                <p class="mt-2">یکی از پست‌ها را نیز به صورت بصری طراحی و ارائه دهید.</p>
+            </div>
+
+            <!-- Accordion: Case Study Session 4 -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    مطالعه‌ موردی جلسه ۴ – طراحی پیج و محتوای اینستاگرام «رزین‌آرا»
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    در این بخش، تقویم محتوا، کپشن‌ها و ایده‌های بصری واقعی برای پیج زیورآلات رزینی
+                                    می‌سازیم.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li>
+                                    <b>تعریف ستون‌های محتوایی رزین‌آرا:</b><br />
+                                    از مدل می‌خواهیم ۴ ستون محتوا برای پیج رزین‌آرا پیشنهاد دهد:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>پشت صحنه ساخت (Behind the scenes)</li>
+                                        <li>معرفی محصول و ست‌ها</li>
+                                        <li>محتوای آموزشی (نگهداری، استایلینگ، ست کردن)</li>
+                                        <li>نظرات و تجربه مشتریان (UGC)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>طراحی تقویم محتوایی ۱۴ روزه:</b><br />
+                                    با مدل یک جدول می‌سازیم شامل:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>ستون ۱: روز</li>
+                                        <li>ستون ۲: نوع محتوا (ریلز، پست، استوری)</li>
+                                        <li>ستون ۳: ایده کلی پست</li>
+                                        <li>ستون ۴: CTA (مثلاً «سیو کن»، «برای دوستت بفرست»)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>نویسش ۳ کپشن واقعی برای رزین‌آرا:</b><br />
+                                    از مدل می‌خواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک کپشن برای معرفی کالکشن «گل‌های بهاری»</li>
+                                        <li>یک کپشن برای یک ریلز تایم‌لپس ساخت گوشواره</li>
+                                        <li>یک کپشن برای پست معرفی «بسته‌بندی هدیه مخصوص تولد»</li>
+                                    </ul>
+                                    و در معیارها مشخص می‌کنیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>حداکثر ۸۰ کلمه</li>
+                                        <li>دو ایموجی مرتبط</li>
+                                        <li>یک جمله دعوت به تعامل (کامنت/سیو/اشتراک‌گذاری)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>ایده برای عکس و ویدیو:</b><br />
+                                    از مدل می‌خواهیم برای ۵ پست، توضیح صحنه عکاسی/فیلم‌برداری بدهد؛ مثلاً:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>گوشواره‌های رزینی روی پارچه لنین کرم با نور ملایم و گل خشک کنار کادر</li>
+                                        <li>ویدیو ۱۰ ثانیه‌ای از دست یک مشتری که جعبه هدیه رزین‌آرا را باز می‌کند</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>الگوی پاسخ به کامنت‌ها:</b><br />
+                                    ۵ قالب پاسخ به کامنت طراحی می‌کنیم برای:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>تعریف و تمجید مشتری</li>
+                                        <li>سؤال درباره دوام رزین</li>
+                                        <li>سؤال درباره ارسال شهرستان</li>
+                                        <li>سؤال درباره ضدحساسیت بودن</li>
+                                        <li>سؤال درباره جعبه هدیه</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <p class="mt-3 text-xs sm:text-sm text-slate-300">
+                                🎬 خروجی این آکوردیون می‌تواند مستقیماً به دانشجو داده شود تا در خانه واقعی‌اش با دوربین
+                                موبایل یا ابزار AI، آن پست‌ها را بسازد.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session 5: Advertising with AI -->
+        <div class="section-card" id="session5">
+            <div class="step-container">
+                <div class="step-number">۵</div>
+                <div>
+                    <h2 class="step-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="title-icon lucide lucide-megaphone">
+                            <path d="M3 11v-2a4 4 0 0 1 4-4h1l7-3v22l-7-3H7a4 4 0 0 1-4-4v-2" />
+                        </svg>
+                        تبلیغات با هوش مصنوعی
+                        <span class="text-sm font-normal text-gray-700 mr-2">(زمان: ۴ ساعت)</span>
+                    </h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>در این جلسه یاد می‌گیرید چگونه با استفاده از هوش مصنوعی کمپین‌های تبلیغاتی مؤثر طراحی کنید،
+                            مخاطبان هدف را شناسایی کنید، پیام‌های تبلیغاتی جذاب بنویسید و عملکرد تبلیغات خود را تحلیل
+                            نمایید.</b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="takeaway-block">
+                <h4>🎯 اهداف یادگیری</h4>
+                <ul class="list-disc list-inside pr-4 mt-2">
+                    <li>درک اصول بازاریابی دیجیتال و تبلیغات با هوش مصنوعی</li>
+                    <li>آشنایی با ۱۰ ابزار کاربردی در حوزه تبلیغات هوشمند</li>
+                    <li>نوشتن پرامپت برای تولید تبلیغات خلاقانه</li>
+                    <li>تحلیل داده و بهینه‌سازی کمپین‌های تبلیغاتی</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">۱. AdCreative.ai – طراحی بنر و تبلیغ تصویری</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با وارد کردن توضیح محصول و رنگ برند، AdCreative بنرها و تصاویر تبلیغاتی آماده می‌سازد.
+            </p>
+            <div class="example-block">
+                <h4>راهنمای شروع:</h4>
+                <ol class="list-decimal list-inside pr-4">
+                    <li>ثبت‌نام در <a href="https://adcreative.ai" target="_blank"
+                            class="text-blue-500 underline">adcreative.ai</a></li>
+                    <li>افزودن نام برند و رنگ‌ها</li>
+                    <li>وارد کردن توضیح محصول یا خدمات</li>
+                    <li>دانلود بنرهای آماده در اندازه‌های مختلف</li>
+                </ol>
+            </div>
+            <div class="pro-tip-block">
+                <h4>Pro Tip:</h4>
+                <p>
+                    برای تست چندین طراحی، حداقل سه نسخه بنر تولید کرده و از داده‌های عملکرد (CTR) برای انتخاب نهایی
+                    استفاده کنید.
+                </p>
+            </div>
+
+            <h3 class="sub-heading">۲. Copy.ai – نوشتن متن تبلیغاتی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                برای تولید شعار، کپشن و توضیحات تبلیغاتی مناسب با لحن برند.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت نمونه:</h4>
+                <p>
+                    "برای محصولی به نام SmartCup، سه شعار تبلیغاتی خلاقانه و کوتاه بنویس که روی حس مدرن و صرفه‌جویی
+                    تمرکز دارد."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">۳. Pencil.ai – ساخت ویدیوهای تبلیغاتی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                این ابزار با استفاده از تصاویر و متن، ویدیوهای تبلیغاتی کامل می‌سازد.
+            </p>
+            <div class="example-block">
+                <h4>راهنمای شروع:</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>بارگذاری تصاویر محصول و لوگو</li>
+                    <li>افزودن شعار تبلیغاتی و انتخاب موسیقی</li>
+                    <li>دریافت ویدیو در قالب MP4 برای شبکه‌های اجتماعی</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">۴. Meta Advantage+ AI – تبلیغات هدفمند در شبکه‌های اجتماعی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                ابزار رسمی متا برای اجرای تبلیغات هوشمند در اینستاگرام و فیسبوک است.
+            </p>
+            <div class="example-block">
+                <h4>آموزش سریع:</h4>
+                <ol class="list-decimal list-inside pr-4">
+                    <li>ایجاد کمپین در Meta Ads Manager</li>
+                    <li>انتخاب هدف کمپین (مثلاً فروش یا تعامل)</li>
+                    <li>فعال‌سازی گزینه Advantage+ Audience برای هدف‌گیری خودکار</li>
+                </ol>
+            </div>
+
+            <h3 class="sub-heading">۵. Google Performance Max – کمپین‌های چندرسانه‌ای</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                گوگل با این ابزار، تبلیغات شما را در تمام شبکه‌هایش (Search، YouTube، Gmail و …) بهینه می‌کند.
+            </p>
+            <div class="pro-tip-block">
+                <h4>Pro Tip:</h4>
+                <p>از تصاویر و ویدیوهای متنوع استفاده کنید تا الگوریتم بتواند بهترین فرمت را انتخاب کند.</p>
+            </div>
+
+            <h3 class="sub-heading">۶. Ocoya – مدیریت تبلیغات و پست‌ها</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                ابزاری برای زمان‌بندی پست‌ها و تبلیغات، تولید کپشن و تحلیل عملکرد.
+            </p>
+            <div class="example-block">
+                <h4>ویژگی‌ها:</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>مدیریت چند حساب کاربری</li>
+                    <li>ایده‌پردازی خودکار محتوا</li>
+                    <li>تحلیل بازدهی کمپین</li>
+                </ul>
+            </div>
+
+            <h3 class="sub-heading">۷. Surfer SEO – تبلیغات بهینه برای گوگل</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                برای نوشتن متن تبلیغات و صفحات فرود که رتبه بالاتری در گوگل بگیرند.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت نمونه:</h4>
+                <p>
+                    "تحلیل کن چه کلمات کلیدی برای تبلیغ فروش لپ‌تاپ بیشترین CTR را دارند و ساختار متن تبلیغ را پیشنهاد
+                    بده."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">۸. Predis.ai – تولید تبلیغات اجتماعی از متن و تصویر</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                متن تبلیغی کوتاه بدهید و Predis.ai آن را به پست کامل با تصویر و کپشن تبدیل می‌کند.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت نمونه:</h4>
+                <p>
+                    "پستی برای معرفی تخفیف ۳۰٪ در برند کفش ورزشی با لحن پرانرژی تولید کن."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">۹. RunwayML – ساخت ویدیو تبلیغاتی با هوش مصنوعی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                با توصیف صحنه، ویدیوهای تبلیغاتی واقع‌گرایانه بسازید.
+            </p>
+            <div class="example-block">
+                <h4>پرامپت نمونه:</h4>
+                <p>"یک ویدیوی ۵ ثانیه‌ای از نوشیدنی در حال باز شدن در صحنه‌ای با نور طلایی بساز."</p>
+            </div>
+
+            <h3 class="sub-heading">۱۰. ChatGPT / Gemini – طراحی استراتژی تبلیغاتی</h3>
+            <p class="text-gray-900 dark:text-gray-300">
+                از مدل‌های زبانی برای طراحی کامل کمپین، بودجه‌بندی و متن تبلیغ استفاده کنید.
+            </p>
+            <div class="pro-tip-block">
+                <h4>پرامپت نمونه:</h4>
+                <p>
+                    "برای برند لوازم آرایشی ارگانیک، استراتژی تبلیغات دیجیتال سه‌ماهه طراحی کن با تمرکز بر افزایش
+                    تعامل در اینستاگرام."
+                </p>
+            </div>
+
+            <h3 class="sub-heading">تمرین عملی</h3>
+            <div class="pro-tip-block">
+                <h4>تمرین: طراحی کمپین تبلیغاتی کامل</h4>
+                <ol class="list-decimal list-inside pr-4">
+                    <li>یک محصول فرضی انتخاب کنید.</li>
+                    <li>با Copy.ai شعار تبلیغاتی بنویسید.</li>
+                    <li>با AdCreative.ai بنر طراحی کنید.</li>
+                    <li>ویدیو با Pencil.ai بسازید.</li>
+                    <li>با ChatGPT استراتژی انتشار بنویسید.</li>
+                    <li>نتیجه را در قالب فایل PDF تحویل دهید.</li>
+                </ol>
+            </div>
+
+            <!-- Accordion: Case Study Session 5 -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    مطالعه‌ موردی جلسه ۵ – کمپین تبلیغاتی برای رزین‌آرا
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    طراحی یک کمپین واقعی و قابل‌اجرا برای فروش زیورآلات رزینی در اینستاگرام.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li>
+                                    <b>تعریف هدف کمپین:</b><br />
+                                    هدف: «فروش ۳۰ ست زیورآلات رزینی در ۱۴ روز، با تمرکز روی هدیه تولد.»<br />
+                                    در کلاس، این هدف را با مدل چک می‌کنیم و می‌پرسیم:
+                                    «آیا این هدف واقع‌بینانه است؟ چه KPIهایی برای آن پیشنهاد می‌دهی؟»
+                                </li>
+                                <li>
+                                    <b>تعریف مخاطب هدف کمپین:</b><br />
+                                    با مدل، پرسونای دقیق کمپین را می‌سازیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>جنسیت غالب: زن</li>
+                                        <li>سن: ۱۸ تا ۳۰</li>
+                                        <li>محل سکونت: شهرهای بزرگ</li>
+                                        <li>علاقه‌مندی‌ها: هنر، اکسسوری، هدیه، اینستاگرام</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>طراحی پیام اصلی تبلیغ (Key Message):</b><br />
+                                    از مدل می‌خواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک پیام اصلی: «هر تکه، یک داستان رزینی برای هدیه دادن»</li>
+                                        <li>۳ نسخه کوتاه‌تر برای استفاده در بنر و کپشن</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بنر و ویدیوی تبلیغاتی:</b><br />
+                                    در کلاس تعریف می‌کنیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک بنر: عکس جعبه هدیه باز شده با زیورآلات رزینی و متن «هدیه‌ات را خاص کن»
+                                        </li>
+                                        <li>یک ویدیوی ۱۰–۱۵ ثانیه‌ای: از باز شدن جعبه تا نمای نزدیک جزئیات رزین</li>
+                                    </ul>
+                                    سپس پرامپتی برای ابزارهای ویدیوسازی/تصویری می‌نویسیم تا این صحنه‌ها را بسازند.
+                                </li>
+                                <li>
+                                    <b>طراحی ۳ آگهی اینستاگرامی:</b><br />
+                                    از مدل می‌خواهیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک آگهی برای استوری (۳ اسلاید پشت‌سرهم)</li>
+                                        <li>یک آگهی برای فید (پست تک اسلایدی)</li>
+                                        <li>یک سناریو برای ریلز تبلیغاتی کوتاه</li>
+                                    </ul>
+                                    برای هر کدام کپشن و CTA جداگانه طراحی می‌کنیم.
+                                </li>
+                                <li>
+                                    <b>برنامه انتشار و بودجه (حتی اگر فرضی):</b><br />
+                                    با مدل یک جدول می‌سازیم:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>روز ۱ تا ۳: معرفی کمپین و هدیه‌ها</li>
+                                        <li>روز ۴ تا ۱۰: نمایش جزئیات کاردستی/دست‌ساز بودن</li>
+                                        <li>روز ۱۱ تا ۱۴: یادآوری و کمبود موجودی («فقط ۵ ست باقی مانده»)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>تعریف شاخص‌های موفقیت:</b><br />
+                                    از مدل می‌خواهیم برای این کمپین KPI تعریف کند، مثل:
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>تعداد کلیک روی لینک واتساپ/دایرکت</li>
+                                        <li>نرخ تبدیل بازدید به سفارش</li>
+                                        <li>تعداد ذخیره (Save) و به اشتراک‌گذاری</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <p class="mt-3 text-xs sm:text-sm text-slate-300">
+                                📌 خروجی این آکوردیون می‌تواند به‌عنوان «طرح کمپین پایان دوره» برای هر گروه دانشجو
+                                استفاده شود.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Project -->
+        <div class="section-card">
+            <div class="step-container">
+                <div class="step-number">پایانی</div>
+                <div>
+                    <h2 class="step-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="title-icon lucide lucide-award">
+                            <circle cx="12" cy="8" r="6" />
+                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                        </svg>پروژه نهایی: طراحی کامل یک کسب‌وکار آنلاین</h2>
+                    <p class="text-gray-900 dark:text-gray-300 mt-2">
+                        <b>در این مرحله تمام مهارت‌های آموخته شده را برای اجرای یک پروژه کامل از صفر تا صد به کار
+                            می‌گیریم.</b>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="sub-heading">مراحل پروژه:</h3>
+            <ol class="list-decimal list-inside pr-4 space-y-2 text-gray-900 dark:text-gray-300">
+                <li><b>ایده اولیه:</b> یک ایده کسب‌وکار جدید و نوآورانه در بازار ایران انتخاب کنید.</li>
+                <li><b>تحلیل بازار و رقبا:</b> با استفاده از ابزارهای هوش مصنوعی، بازار و رقبا را تحلیل کنید.</li>
+                <li><b>پرسونای مشتری:</b> پرسونای مشتری هدف خود را طراحی کنید.</li>
+                <li><b>ویژگی‌های محصول (MVP):</b> حداقل محصول قابل عرضه را تعریف کنید.</li>
+                <li><b>تقویم محتوایی و نمونه‌های بصری:</b> استراتژی محتوایی برای کسب‌وکار خود طراحی کنید.</li>
+                <li><b>استراتژی‌های فروش و رشد:</b> روش‌های فروش و رشد کسب‌وکار را مشخص کنید.</li>
+                <li><b>پلن پشتیبانی:</b> سیستم پشتیبانی مشتری را طراحی کنید.</li>
+            </ol>
+
+            <div class="takeaway-block">
+                <h4>نکات مهم:</h4>
+                <ul class="list-disc list-inside pr-4">
+                    <li>برای هر بخش، پرامپت‌های دقیق و نتایج به دست آمده از هوش مصنوعی را ضمیمه کنید.</li>
+                    <li>قدرت واقعی هوش مصنوعی در ترکیب ابزارهای مختلف برای رسیدن به یک هدف مشخص است.</li>
+                    <li>یک پروژه کامل شامل مراحل استراتژی، تولید محتوای چندرسانه‌ای (متن، عکس، ویدیو) و تحلیل نتایج است.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Accordion: Case Study Final Project -->
+            <div class="mt-8">
+                <div class="accordion-item-inner bg-slate-900 text-slate-100 p-4 sm:p-5 rounded-2xl">
+                    <div class="flex items-center justify-between accordion-toggle">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-pink-500/20 text-pink-300 text-sm font-bold">
+                                Case
+                            </span>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold">
+                                    جمع‌بندی مطالعه‌ موردی – فایل نهایی پروژه «رزین‌آرا»
+                                </h3>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">
+                                    این آکوردیون توضیح می‌دهد دانشجو در پروژه نهایی برای فروشگاه زیورآلات رزینی چه
+                                    تحویلی باید آماده کند.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="ml-2 text-slate-300">
+                            <i class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </span>
+                    </div>
+                    <div class="accordion-content mt-4">
+                        <div class="pt-4 border-t border-slate-600/40 space-y-3 text-sm sm:text-base">
+                            <p class="font-semibold text-pink-300 mb-1">
+                                📁 ساخت «فایل رزین‌آرا» به‌عنوان پروژه نهایی:
+                            </p>
+                            <p>
+                                هر گروه/دانشجو یک داکیومنت نهایی (PDF یا پاورپوینت) آماده می‌کند که تمام مراحل دوره را
+                                روی رزین‌آرا پیاده کرده است.
+                            </p>
+                            <ol class="list-decimal list-inside space-y-2 mt-2">
+                                <li>
+                                    <b>بخش ۱ – معرفی کلی:</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>یک اسلاید معرفی برند (نام، شعار، مخاطب هدف)</li>
+                                        <li>خلاصه ۵ خطی داستان برند و چرا رزین</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بخش ۲ – خروجی‌های جلسه ۱ (پرامپت‌ها):</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>پرامپت مادر هویت برند</li>
+                                        <li>خلاصه خروجی مدل درباره شخصیت و لحن برند</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بخش ۳ – خروجی‌های جلسه ۲ (ساخت کسب‌وکار):</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>تحلیل کوتاه بازار و رقبا</li>
+                                        <li>جدول MVP محصولات</li>
+                                        <li>نمونه‌های نام برند و لوگو (حتی اگر فقط موکاپ باشد)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بخش ۴ – خروجی‌های جلسه ۳ (مدیریت):</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>سناریوهای پیام مشتری و پاسخ‌های استاندارد</li>
+                                        <li>تمپلیت ساده مدیریت سفارشات / موجودی</li>
+                                        <li>خلاصه استراتژی رشد ۳ ماهه</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بخش ۵ – خروجی‌های جلسه ۴ (محتوا):</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>تقویم محتوایی ۱۴ یا ۳۰ روزه</li>
+                                        <li>حداقل ۳ کپشن آماده برای پست‌های رزین‌آرا</li>
+                                        <li>حداقل ۲ ایده پست بصری توضیح داده‌شده (یا موکاپ طراحی شده)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <b>بخش ۶ – خروجی‌های جلسه ۵ (کمپین):</b><br />
+                                    <ul class="list-disc list-inside pr-5 mt-1">
+                                        <li>هدف کمپین و KPIها</li>
+                                        <li>سناریو استوری/فید/ریلز</li>
+                                        <li>نمونه متن/بنر کمپین (حتی اگر موکاپ باشد)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <p class="mt-3 text-xs sm:text-sm text-slate-300">
+                                ✅ در پایان دوره، دانشجو فقط یک تئوری عمومی یاد نگرفته؛ بلکه یک کسب‌وکار فرضی ولی واقعی
+                                (فروشگاه زیورآلات رزینی) را از صفر تا سطح قابل‌ارائه طراحی کرده است.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center py-8 text-gray-700 dark:text-gray-400">
+            <p>این دوره جامع برای توانمندسازی شما در استفاده از هوش مصنوعی در کسب‌وکار طراحی شده است.</p>
+            <p>مطالعه موردی عملی: فروشگاه زیورآلات دست‌ساز / رزینی «رزین‌آرا»</p>
+            <p>طراحی و اجرا : <a href="https://www.instagram.com/hosseinfallah_h/"><span
+                        style="color:#0072ff">hosseinfallah_h@</span></a></p>
+            <p>&copy; 2025 - موفق باشید!</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-card');
+            const progressbar = document.getElementById('scroll-progress-bar');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => observer.observe(section));
+
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.body.scrollHeight - window.innerHeight;
+                progressbar.style.width = `${(window.scrollY / totalHeight) * 100}%`;
+            });
+
+            const toggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            const navbar = document.querySelector('.navbar');
+
+            const toggleDarkMode = () => {
+                body.classList.toggle('dark');
+                navbar.classList.toggle('dark');
+                localStorage.setItem('darkMode', body.classList.contains('dark'));
+            };
+
+            if (localStorage.getItem('darkMode') === 'true') {
+                body.classList.add('dark');
+                navbar.classList.add('dark');
+            }
+
+            toggle.addEventListener('click', toggleDarkMode);
+
+            // Accordion logic
+            const accordionItems = document.querySelectorAll('.accordion-item-inner');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-toggle');
+                const content = item.querySelector('.accordion-content');
+                const icon = item.querySelector('.fa-chevron-down');
+
+                if (content) {
+                    content.style.maxHeight = '0px';
+                }
+
+                header.addEventListener('click', () => {
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+                    if (isOpen) {
+                        content.style.maxHeight = '0px';
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
+```
